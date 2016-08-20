@@ -1,13 +1,17 @@
 import Entities.SexRatioEntity;
+import Utils.SortUtils;
 
 import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Geovane on 17/08/2016.
  */
 public class Main {
 
-    public static final String CSV_FILE_PATH = "C:\\BitBucket\\CPD\\CPDProject\\resources\\database_test.csv";
+//    public static final String CSV_FILE_PATH = "C:\\BitBucket\\CPD\\CPDProject\\resources\\database_test.csv";
+    public static final String CSV_FILE_PATH = "C:\\BitBucket\\CPD\\CPDProject\\resources\\database.csv";
     public SexRatioEntity[] data;
 
 
@@ -15,10 +19,13 @@ public class Main {
 
         loadInfo();
 
-        for (SexRatioEntity entity: data ) {
-            System.out.println("Entity: " + entity.toString() + "\n");
-        }
+        Map<String, String> algorithmsTime = new HashMap<>();
+        SortUtils utils = new SortUtils();
 
+        algorithmsTime = utils.sortByAllAlgorithms(data);
+
+        System.out.println("Tempo decorrido para cada algoritmo (em milissegundos) :");
+        System.out.println(algorithmsTime.toString());
 
     }
 
@@ -40,7 +47,7 @@ public class Main {
 
             for (int i = 0; i < fileSize; i++) {
 
-                System.out.println("Lendo a linha numero: " + (i+1));
+//                System.out.println("Lendo a linha numero: " + (i+1));
 
                 currentInfo = br.readLine();
                 SexRatioEntity currentEntity = new SexRatioEntity();
