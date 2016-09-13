@@ -14,10 +14,10 @@ public class SortUtils {
 
         Map<String, String> sortTimes = new HashMap<>();
         
-        sortTimes.put("Insercao Direta", String.valueOf(insertionSort(data)));
-
+        sortTimes.put("Insercao Direta com Busca Linear", String.valueOf(linearInsertionSort(data)));
+        sortTimes.put("Insercao Direta com Busca Binária", String.valueOf(binaryInsertionSort(data, data.length)));
 //        sortTimes.put("Bubble Sort", String.valueOf(bubbleSort(data)));
-       sortTimes.put("Shell Sort", String.valueOf(shellSort(data)));
+        sortTimes.put("Shell Sort", String.valueOf(shellSort(data)));
 
         return sortTimes;
 
@@ -25,7 +25,7 @@ public class SortUtils {
 
 
 
-    private long insertionSort(SexRatioEntity data[]){
+    private long linearInsertionSort(SexRatioEntity data[]){
 
         long startTime = System.currentTimeMillis();
 
@@ -43,6 +43,34 @@ public class SortUtils {
 
         
         return elapsedTime;
+    }
+
+    private long binaryInsertionSort(SexRatioEntity data[], int n){
+
+        long startTime = System.currentTimeMillis();
+        for (int i=0;i<n;++i){
+            SexRatioEntity temp = data[i];
+            int left = 0;
+            int right = i;
+            while (left < right){
+                int middle = (left + right)/2;
+                if (temp.getRatio() >= data[middle].getRatio())
+                    left = middle+1;
+                else
+                    right = middle;
+            }
+            for (int j=i ; j>left ; --j){
+               swap(data,j-1,j);
+            }
+        }
+        long elapsedTime = System.currentTimeMillis() - startTime;
+        return elapsedTime;
+    }
+
+    public static void swap(SexRatioEntity a[],int i,int j){
+        SexRatioEntity k=a[i];
+        a[i]=a[j];
+        a[j]=k;
     }
 
     private long shellSort(SexRatioEntity data[]){
