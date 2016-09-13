@@ -16,7 +16,7 @@ public class SortUtils {
         
         sortTimes.put("Insercao Direta com Busca Linear", String.valueOf(linearInsertionSort(data)));
         sortTimes.put("Insercao Direta com Busca Binária", String.valueOf(binaryInsertionSort(data, data.length)));
-//        sortTimes.put("Bubble Sort", String.valueOf(bubbleSort(data)));
+        sortTimes.put("Bubble Sort", String.valueOf(bubbleSort(data)));
         sortTimes.put("Shell Sort", String.valueOf(shellSort(data)));
 
         return sortTimes;
@@ -100,8 +100,26 @@ public class SortUtils {
         return elapsedTime;
 }
 
-//    private long bubbleSort(int data[]){
+    private long bubbleSort(SexRatioEntity data[]){
 
-//    }
+        long startTime = System.currentTimeMillis();
+
+        int n = data.length;
+        SexRatioEntity temp;
+
+        for(int i=0; i < n; i++){
+            for(int j=1; j < (n-i); j++){
+
+                if(data[j-1].getRatio() > data[j].getRatio()){
+                    temp = data[j-1];
+                    data[j-1] = data[j];
+                    data[j] = temp;
+                }
+
+            }
+        }
+        long elapsedTime = System.currentTimeMillis() - startTime;
+        return elapsedTime;
+    }
 
 }
