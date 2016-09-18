@@ -11,7 +11,7 @@ import java.util.Map;
 public class Main {
 
 //    public static final String CSV_FILE_PATH = "C:\\BitBucket\\CPD\\CPDProject\\resources\\database_test.csv";
-    public static final String CSV_FILE_PATH = "C:\\BitBucket\\CPD\\CPDProject\\resources\\database.csv";
+    public static final String CSV_FILE_PATH = "C:\\Users\\Fabricio Szczesny\\Documents\\CPD\\CPDProject\\resources\\database.csv";
     public SexRatioEntity[] data;
 
 
