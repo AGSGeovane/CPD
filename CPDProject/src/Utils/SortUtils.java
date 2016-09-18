@@ -10,6 +10,8 @@ import java.util.Map;
  */
 public class SortUtils {
 
+    private SexRatioEntity[] dataToQuickSort;
+
     public Map<String, String> sortByAllAlgorithms(SexRatioEntity data[]){
 
         Map<String, String> sortTimes = new HashMap<>();
@@ -18,6 +20,7 @@ public class SortUtils {
         sortTimes.put("Insercao Direta com Busca Binária", String.valueOf(binaryInsertionSort(data, data.length)));
         sortTimes.put("Bubble Sort", String.valueOf(bubbleSort(data)));
         sortTimes.put("Shell Sort", String.valueOf(shellSort(data)));
+        sortTimes.put("Quick Sort", String.valueOf(quickSort(data)));
 
         return sortTimes;
 
@@ -122,4 +125,75 @@ public class SortUtils {
         return elapsedTime;
     }
 
+    private long quickSort(SexRatioEntity data[]){
+
+        dataToQuickSort = data;
+
+        long startTime = System.currentTimeMillis();
+
+//        System.out.println("Unordered Data: \n\n");
+//        for (SexRatioEntity unorderedData:dataToQuickSort) {
+//            System.out.println(unorderedData.getCityName() + " || " + unorderedData.getRatio());
+//        }
+
+        quickSort(0, dataToQuickSort.length-1);
+
+        long elapsedTime = System.currentTimeMillis() - startTime;
+
+
+//        System.out.println("\n\n\nOrdered Data: \n");
+//        for (SexRatioEntity quickData : dataToQuickSort){
+//            System.out.println(quickData.getCityName() + " || " + quickData.getRatio());
+//        }
+
+        return elapsedTime;
+
+    }
+
+    private void quickSort( int firstIndex, int lastIndex){
+        if(lastIndex > firstIndex){
+            int pivot = randomPart(firstIndex, lastIndex);
+
+
+
+            quickSort(firstIndex, pivot - 1);
+            quickSort(pivot + 1, lastIndex);
+        }
+    }
+
+    private int randomPart(int firstIndex, int lastIndex) {
+            int indexToBeTrade = (firstIndex + 1) + (int)(Math.random() * (lastIndex - firstIndex - 1));
+
+//        System.out.println("First Index, Last index, Index to be trade: " + firstIndex + "||" + lastIndex + "||" + indexToBeTrade);
+//
+//            SexRatioEntity aux = dataToQuickSort[firstIndex];
+//            dataToQuickSort[firstIndex] = dataToQuickSort[indexToBeTrade];
+//            dataToQuickSort[indexToBeTrade] = aux;
+
+            return partition(firstIndex, lastIndex);
+    }
+
+    private int partition(int firstIndex, int lastIndex){
+
+        int i = firstIndex, j = lastIndex;
+        SexRatioEntity aux;
+        SexRatioEntity pivot = dataToQuickSort[(firstIndex + lastIndex) / 2];
+
+        while (i <= j) {
+            while (dataToQuickSort[i].getRatio() < pivot.getRatio())
+                i++;
+            while (dataToQuickSort[j].getRatio() > pivot.getRatio())
+                j--;
+            if (i <= j) {
+                aux = dataToQuickSort[i];
+                dataToQuickSort[i] = dataToQuickSort[j];
+                dataToQuickSort[j] = aux;
+                i++;
+                j--;
+            }
+        }
+
+        return i;
+    }
+    
 }
