@@ -5,6 +5,7 @@ import Entities.SexRatioEntity;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.Arrays;
 
 /**
  * Created by Mordor on 20/08/2016.
@@ -20,16 +21,16 @@ public class SortUtils {
     public static final String HEAP_SORT_KEY = "HPST";
     public static final String RADIX_SORT_MSD = "RMSD";
 
-    public Map<String, String> sortByAllAlgorithms(SexRatioEntity data[]){
+    public Map<String, String> sortByAllAlgorithms(SexRatioEntity data[]) {
 
         Map<String, String> sortTimes = new HashMap<>();
-        
+
         sortTimes.put(INSERTION_SORT_LINEAR_KEY, String.valueOf(linearInsertionSort(data))); //Insertion Sort com Busca Linear
         sortTimes.put(INSERTION_SORT_BINARY_KEY, String.valueOf(binaryInsertionSort(data, data.length))); //Insertion Sort com Busca Binária
         sortTimes.put(BUBBLE_SORT_KEY, String.valueOf(bubbleSort(data))); //Bubble Sort
         sortTimes.put(SHELL_SORT_KEY, String.valueOf(shellSort(data))); //Shell Sort
-//        sortTimes.put(QUICK_SORT_KEY, String.valueOf(quickSort(data))); //Shell Sort
-//        sortTimes.put(MERGE_SORT_KEY, String.valueOf(mergeSort(data))); //Shell Sort
+        sortTimes.put(QUICK_SORT_KEY, String.valueOf(quickSortRandon(data))); //quick Sort Randomizado
+        sortTimes.put(MERGE_SORT_KEY, String.valueOf(mergeSort(data))); //Merge Sort
 //        sortTimes.put(HEAP_SORT_KEY, String.valueOf(heapSort(data))); //Shell Sort
 //        sortTimes.put(RADIX_SORT_MSD, String.valueOf(radixSort(data))); //Shell Sort
 
@@ -136,28 +137,28 @@ public class SortUtils {
     }
 
 
-    private long quickSort(SexRatioEntity[] data){
+    private long quickSort(SexRatioEntity[] data) {
         long startTime = System.currentTimeMillis();
 
-        quickSortOperation(data,0,data.length-1);
+        quickSortOperation(data, 0, data.length - 1);
 
         long elapsedTime = System.currentTimeMillis() - startTime;
         return elapsedTime;
     }
 
-    private long quickSortRandon(SexRatioEntity[] data){
+    private long quickSortRandon(SexRatioEntity[] data) {
         long startTime = System.currentTimeMillis();
 
         SexRatioEntity temporaryData;
         int posicao;
-        for (int i=0 ; i<data.length ; i++){
+        for (int i = 0; i < data.length; i++) {
             Random gerador = new Random();
-            posicao = gerador.nextInt(data.length-1);
+            posicao = gerador.nextInt(data.length - 1);
             temporaryData = data[i];
             data[i] = data[posicao];
             data[posicao] = temporaryData;
         }
-        quickSortOperation(data,0,data.length-1);
+        quickSortOperation(data, 0, data.length - 1);
 
         long elapsedTime = System.currentTimeMillis() - startTime;
         return elapsedTime;
@@ -191,3 +192,63 @@ public class SortUtils {
         data[f] = middle;
         return f;
     }
+
+    static long mergeSort(SexRatioEntity[] data){
+        long startTime = System.currentTimeMillis();
+
+        mergeSortAplication(data);
+
+        long elapsedTime = System.currentTimeMillis() - startTime;
+        return elapsedTime;
+    }
+
+    static void mergeSortAplication(SexRatioEntity[] data) {
+        if (data.length > 1) {
+            int middle = data.length/2;
+            SexRatioEntity[] leftArray = Arrays.copyOfRange(data, 0, middle);
+            SexRatioEntity[] rightArray = Arrays.copyOfRange(data,middle+1,data.length);
+            mergeSortAplication(leftArray);
+            mergeSortAplication(rightArray);
+            data = merge(leftArray,rightArray);
+        }
+    }
+
+    static SexRatioEntity[] merge(SexRatioEntity[] dataLeft, SexRatioEntity[] dataRight) {
+        int maxSize = dataLeft.length + dataRight.length;
+        SexRatioEntity[] newArray = new SexRatioEntity[maxSize];
+        int i,left_i,right_i;
+        i = left_i = right_i = 0;
+        while ( i < maxSize) {
+            if ((left_i < dataLeft.length) && (right_i<dataRight.length)) {
+                if (dataLeft[left_i].getRatio() < dataRight[right_i].getRatio()) {
+                    newArray[i] = dataLeft[left_i];
+                    i++;
+                    left_i++;
+                }
+                else {
+                    newArray[i] = dataRight[right_i];
+                    i++;
+                    right_i++;
+                }
+            }
+            else {
+                if (left_i >= dataLeft.length) {
+                    while (right_i < dataRight.length) {
+                        newArray[i] = dataRight[right_i];
+                        i++;
+                        right_i++;
+                    }
+                }
+                if (right_i >= dataRight.length) {
+                    while (left_i < dataLeft.length) {
+                        newArray[i] = dataLeft[left_i];
+                        left_i++;
+                        i++;
+                    }
+                }
+            }
+        }
+        return newArray;
+
+    }
+}

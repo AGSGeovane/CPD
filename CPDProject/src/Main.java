@@ -11,12 +11,12 @@ import java.util.Random;
  */
 public class Main {
 
-    public static final String CSV_FILE_PATH = "C:\\BitBucket\\CPD\\CPDProject\\resources\\database.csv";
+    //public static final String CSV_FILE_PATH = "C:\\BitBucket\\CPD\\CPDProject\\resources\\database.csv";
     public static final String PERSISTENCE_FILE_NAME = "resultados_Iluminados.txt";
     public static final int UNLIMITED_ELEMENTES_FLAG = -1;
-//    public static final String CSV_FILE_PATH = "C:\\Users\\Fabricio Szczesny\\Documents\\CPD\\CPDProject\\resources\\database.csv";
+    public static final String CSV_FILE_PATH = "C:\\Users\\Fabricio Szczesny\\Documents\\CPD\\CPDProject\\resources\\database.csv";
 //    public SexRatioEntity[] data;
-
+/*
     public void startSort(){
 
         SexRatioEntity[] data = loadInfo(UNLIMITED_ELEMENTES_FLAG);
@@ -24,7 +24,7 @@ public class Main {
         SexRatioEntity[] sortedData = utils.getElementsSorted(data);
 
 
-    }
+    }*/
 
     private void calculateSortTimes(){
         SexRatioEntity[] data_with_100 = loadInfo(100);
@@ -179,7 +179,7 @@ public class Main {
 
     public static void main(String args[]){
         Main caller = new Main();
-        caller.startSort();
+       // caller.startSort();
         caller.calculateSortTimes();
     }
 
