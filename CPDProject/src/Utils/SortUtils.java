@@ -11,16 +11,27 @@ import java.util.Random;
  */
 public class SortUtils {
 
-    public Map<String, String> sortByAllAlgorithms(SexRatioEntity data[]) {
+    public static final String INSERTION_SORT_LINEAR_KEY = "ISBL";
+    public static final String INSERTION_SORT_BINARY_KEY = "ISBB";
+    public static final String BUBBLE_SORT_KEY = "BBST";
+    public static final String SHELL_SORT_KEY = "SHST";
+    public static final String QUICK_SORT_KEY = "QSRM";
+    public static final String MERGE_SORT_KEY = "MGST";
+    public static final String HEAP_SORT_KEY = "HPST";
+    public static final String RADIX_SORT_MSD = "RMSD";
+
+    public Map<String, String> sortByAllAlgorithms(SexRatioEntity data[]){
 
         Map<String, String> sortTimes = new HashMap<>();
-
-        sortTimes.put("Insercao Direta com Busca Linear", String.valueOf(linearInsertionSort(data)));
-        sortTimes.put("Insercao Direta com Busca Binária", String.valueOf(binaryInsertionSort(data, data.length)));
-        sortTimes.put("Bubble Sort", String.valueOf(bubbleSort(data)));
-        sortTimes.put("Shell Sort", String.valueOf(shellSort(data)));
-        sortTimes.put("Quick Sort", String.valueOf(quickSort(data)));
-        sortTimes.put("Quick Sort Ramdomizado", String.valueOf(quickSortRandon(data)));
+        
+        sortTimes.put(INSERTION_SORT_LINEAR_KEY, String.valueOf(linearInsertionSort(data))); //Insertion Sort com Busca Linear
+        sortTimes.put(INSERTION_SORT_BINARY_KEY, String.valueOf(binaryInsertionSort(data, data.length))); //Insertion Sort com Busca Binária
+        sortTimes.put(BUBBLE_SORT_KEY, String.valueOf(bubbleSort(data))); //Bubble Sort
+        sortTimes.put(SHELL_SORT_KEY, String.valueOf(shellSort(data))); //Shell Sort
+//        sortTimes.put(QUICK_SORT_KEY, String.valueOf(quickSort(data))); //Shell Sort
+//        sortTimes.put(MERGE_SORT_KEY, String.valueOf(mergeSort(data))); //Shell Sort
+//        sortTimes.put(HEAP_SORT_KEY, String.valueOf(heapSort(data))); //Shell Sort
+//        sortTimes.put(RADIX_SORT_MSD, String.valueOf(radixSort(data))); //Shell Sort
 
         return sortTimes;
 
@@ -180,4 +191,3 @@ public class SortUtils {
         data[f] = middle;
         return f;
     }
-}
