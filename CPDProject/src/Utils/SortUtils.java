@@ -38,7 +38,11 @@ public class SortUtils {
 
     }
 
-
+    /** Inserção Direta Linear
+     * Created by Geovane on 20/08/2016.
+     * FUNCIOMENTO: Implementado o Inserção direta com busca linear
+     * MATERIAL DE APOIO: http://www.devmedia.com.br/algoritmos-de-ordenacao-em-java/32693
+     */
     private long linearInsertionSort(SexRatioEntity data[]) {
 
         long startTime = System.currentTimeMillis();
@@ -59,6 +63,12 @@ public class SortUtils {
         return elapsedTime;
     }
 
+
+    /** Inserção Direta Busca Binária e funções auxiliares
+     * Created by Fabrício on 13/09/2016.
+     * FUNCIOMENTO: Implementado o Inserção direta com busca binária
+     * MATERIAL DE APOIO:  http://stackoverflow.com/questions/3075752/binary-insertion-sort-algorithm
+     */
     private long binaryInsertionSort(SexRatioEntity data[], int n) {
 
         long startTime = System.currentTimeMillis();
@@ -87,6 +97,12 @@ public class SortUtils {
         a[j] = k;
     }
 
+
+    /** ShellSort
+     * Created by Fabrício on 13/09/2016.
+     * FUNCIONAMENTO: Foi implementado o ShellSort tradicional
+     * MATERIAL DE APOIO: http://www.devmedia.com.br/algoritmos-de-ordenacao-em-java/32693
+     */
     private long shellSort(SexRatioEntity data[]) {
 
         long startTime = System.currentTimeMillis();
@@ -114,6 +130,12 @@ public class SortUtils {
         return elapsedTime;
     }
 
+
+    /** BubbleSort
+     * Created by Fabrício on 13/09/2016.
+     * FUNCIONAMENTO: Foi implementado o BubbleSort tradicional
+     * MATERIAL DE APOIO: http://www.devmedia.com.br/algoritmos-de-ordenacao-em-java/32693
+     */
     private long bubbleSort(SexRatioEntity data[]) {
 
         long startTime = System.currentTimeMillis();
@@ -137,15 +159,11 @@ public class SortUtils {
     }
 
 
-    private long quickSort(SexRatioEntity[] data) {
-        long startTime = System.currentTimeMillis();
-
-        quickSortOperation(data, 0, data.length - 1);
-
-        long elapsedTime = System.currentTimeMillis() - startTime;
-        return elapsedTime;
-    }
-
+    /** QuickSortRandomizado e funções auxiliares
+     * Created by Fabrício on 20/09/2016.
+     * FUNCIONAMENTO: Randomiza vetor atodo primeiramente e depois aplica o quickSort tradicional,sendo feito apartir de uma função para contagem do tempo.
+     * MATERIAL DE APOIO: http://www.devmedia.com.br/algoritmos-de-ordenacao-em-java/32693
+     */
     private long quickSortRandon(SexRatioEntity[] data) {
         long startTime = System.currentTimeMillis();
 
@@ -193,6 +211,12 @@ public class SortUtils {
         return f;
     }
 
+
+    /** MergeSort e funções auxiliares
+     * Created by Fabrício on 20/09/2016.
+     * FUNCIONAMENTO: Implementação do MergeSort tradicional, sendo feito apartir de uma função para contagem do tempo.
+     * MATERIAL DE APOIO: http://stackoverflow.com/questions/13727030/mergesort-in-java
+     */
     static long mergeSort(SexRatioEntity[] data){
         long startTime = System.currentTimeMillis();
 
@@ -205,50 +229,51 @@ public class SortUtils {
     static void mergeSortAplication(SexRatioEntity[] data) {
         if (data.length > 1) {
             int middle = data.length/2;
+
             SexRatioEntity[] leftArray = Arrays.copyOfRange(data, 0, middle);
-            SexRatioEntity[] rightArray = Arrays.copyOfRange(data,middle+1,data.length);
+            SexRatioEntity[] rightArray = Arrays.copyOfRange(data,middle,data.length);
+
             mergeSortAplication(leftArray);
             mergeSortAplication(rightArray);
-            data = merge(leftArray,rightArray);
+
+            merge(data,leftArray,rightArray);
         }
     }
 
-    static SexRatioEntity[] merge(SexRatioEntity[] dataLeft, SexRatioEntity[] dataRight) {
-        int maxSize = dataLeft.length + dataRight.length;
-        SexRatioEntity[] newArray = new SexRatioEntity[maxSize];
+    static void merge(SexRatioEntity[] data, SexRatioEntity[] leftData, SexRatioEntity[] rightData) {
+        int totElem = leftData.length + rightData.length;
         int i,left_i,right_i;
         i = left_i = right_i = 0;
-        while ( i < maxSize) {
-            if ((left_i < dataLeft.length) && (right_i<dataRight.length)) {
-                if (dataLeft[left_i].getRatio() < dataRight[right_i].getRatio()) {
-                    newArray[i] = dataLeft[left_i];
+        while ( i < totElem) {
+            if ((left_i < leftData.length) && (right_i<rightData.length)) {
+                if (leftData[left_i].getRatio() < rightData[right_i].getRatio()) {
+                    data[i] = leftData[left_i];
                     i++;
                     left_i++;
                 }
                 else {
-                    newArray[i] = dataRight[right_i];
+                    data[i] = rightData[right_i];
                     i++;
                     right_i++;
                 }
             }
             else {
-                if (left_i >= dataLeft.length) {
-                    while (right_i < dataRight.length) {
-                        newArray[i] = dataRight[right_i];
+                if (left_i >= leftData.length) {
+                    while (right_i < rightData.length) {
+                        data[i] = rightData[right_i];
                         i++;
                         right_i++;
                     }
                 }
-                if (right_i >= dataRight.length) {
-                    while (left_i < dataLeft.length) {
-                        newArray[i] = dataLeft[left_i];
+                if (right_i >= rightData.length) {
+                    while (left_i < leftData.length) {
+                        data[i] = leftData[left_i];
                         left_i++;
                         i++;
                     }
                 }
             }
         }
-        return newArray;
-
     }
+
 }
