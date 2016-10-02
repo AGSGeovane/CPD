@@ -46,8 +46,8 @@ public class SortUtils {
         sortTimes.put(MERGE_SORT_KEY + NUMERIC_SUFIX, String.valueOf(mergeSort(data))); //Merge Sort
         sortTimes.put(MERGE_SORT_KEY + STRING_SUFIX, String.valueOf(mergeSortToString(data))); //Merge Sort
 
-//        sortTimes.put(HEAP_SORT_KEY + NUMERIC_SUFIX, String.valueOf(heapSort(data))); //Shell Sort
-//        sortTimes.put(HEAP_SORT_KEY + STRING_SUFIX, String.valueOf(heapSortToString(data))); //Shell Sort
+        sortTimes.put(HEAP_SORT_KEY + NUMERIC_SUFIX, String.valueOf(heapSort(data))); //Shell Sort
+        sortTimes.put(HEAP_SORT_KEY + STRING_SUFIX, String.valueOf(heapSortToString(data))); //Shell Sort
 
 //        sortTimes.put(RADIX_SORT_KEY + STRING_SUFIX, String.valueOf(radixSort(data))); //Shell Sort
 
@@ -296,6 +296,78 @@ public class SortUtils {
     }
 
 
+    /**HeapSort e funções auxiliares
+     * Created by Geovane on 02/10/2016.
+     * FUNCIONAMENTO: Implementação do HeapSort tradicional, sendo feito apartir de uma função para contagem do tempo.
+     * MATERIAL DE APOIO: http://www.code2learn.com/2011/09/heapsort-array-based-implementation-in.html
+     */
+    private long heapSort(SexRatioEntity[] data){
+
+        SexRatioEntity[] dataClone = data.clone();
+
+        long startTime = System.currentTimeMillis();
+
+        SexRatioEntity[] heap = buildheap(dataClone);
+
+        int n = heap.length - 1;
+
+        for(int i=n;i>0;i--){
+            SexRatioEntity aux = heap[0];
+            heap[0] = heap[i];
+            heap[i] = aux;
+            n=n-1;
+            heap = maxheap(heap, 0, n);
+        }
+
+
+        long elapsedTime = System.currentTimeMillis() - startTime;
+
+
+//        for (SexRatioEntity s:heap) {
+//            System.out.println(s.getRatio() + " || " + s.getCityName());
+//        }
+
+        return elapsedTime;
+    }
+
+    private SexRatioEntity[] buildheap(SexRatioEntity[] data){
+
+        int n = data.length-1;
+        for(int i=n/2; i>=0; i--){
+            data = maxheap(data,i, n);
+        }
+
+        return data;
+    }
+
+    private SexRatioEntity[] maxheap(SexRatioEntity[] data, int i, int buildHeapSize){
+
+        int left= 2 * i;
+        int right= (2 * i) + 1;
+
+        int largest;
+
+        if(left <= buildHeapSize && data[left].getRatio() > data[i].getRatio()){
+            largest=left;
+        }
+        else{
+            largest=i;
+        }
+
+        if(right <= buildHeapSize && data[right].getRatio() > data[largest].getRatio()){
+            largest=right;
+        }
+        if(largest!=i){
+            SexRatioEntity aux = data[i];
+            data[i] = data[largest];
+            data[largest] = aux;
+            data = maxheap(data, largest, buildHeapSize);
+        }
+
+        return data;
+    }
+
+
     /** Algoritimos para ordenação de arrays de strings **/
 
     /** Todos os algoritimos de ordenação pelas strings leva em consideração o valor do somatórios dos ASCII da string conforme
@@ -539,6 +611,67 @@ public class SortUtils {
                 }
             }
         }
+    }
+
+    private long heapSortToString(SexRatioEntity[] data){
+
+        SexRatioEntity[] dataClone = data.clone();
+
+        long startTime = System.currentTimeMillis();
+
+        SexRatioEntity[] heap = buildheapToString(dataClone);
+
+        int n = heap.length - 1;
+
+        for(int i=n;i>0;i--){
+            SexRatioEntity aux = heap[0];
+            heap[0] = heap[i];
+            heap[i] = aux;
+            n=n-1;
+            heap = maxheapToString(heap, 0, n);
+        }
+
+
+        long elapsedTime = System.currentTimeMillis() - startTime;
+
+        return elapsedTime;
+    }
+
+    private SexRatioEntity[] buildheapToString(SexRatioEntity[] data){
+
+        int n = data.length-1;
+        for(int i=n/2; i>=0; i--){
+            data = maxheapToString(data,i, n);
+        }
+
+        return data;
+    }
+
+    private SexRatioEntity[] maxheapToString(SexRatioEntity[] data, int i, int buildHeapSize){
+
+        int left= 2 * i;
+        int right= (2 * i) + 1;
+
+        int largest;
+
+        if(left <= buildHeapSize && data[left].getCityName().compareTo(data[i].getCityName()) >= 0){
+            largest=left;
+        }
+        else{
+            largest=i;
+        }
+
+        if(right <= buildHeapSize && data[right].getCityName().compareTo(data[largest].getCityName()) >= 0){
+            largest=right;
+        }
+        if(largest!=i){
+            SexRatioEntity aux = data[i];
+            data[i] = data[largest];
+            data[largest] = aux;
+            data = maxheapToString(data, largest, buildHeapSize);
+        }
+
+        return data;
     }
 
 }
