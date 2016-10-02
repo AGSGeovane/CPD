@@ -11,12 +11,12 @@ import java.util.Random;
  */
 public class Main {
 
-    public static final String CSV_FILE_PATH = "C:\\BitBucket\\CPD\\CPDProject\\resources\\database.csv";
+    //public static final String CSV_FILE_PATH = "C:\\BitBucket\\CPD\\CPDProject\\resources\\database.csv";
     public static final String PERSISTENCE_FILE_NAME = "resultados_Iluminados.txt";
     public static final int UNLIMITED_ELEMENTES_FLAG = -1;
-//    public static final String CSV_FILE_PATH = "C:\\Users\\Fabricio Szczesny\\Documents\\CPD\\CPDProject\\resources\\database.csv";
+    public static final String CSV_FILE_PATH = "C:\\Users\\Fabricio Szczesny\\Documents\\CPD\\CPDProject\\resources\\database.csv";
 //    public SexRatioEntity[] data;
-
+/*
     public void startSort(){
 
         SexRatioEntity[] data = loadInfo(UNLIMITED_ELEMENTES_FLAG);
@@ -24,7 +24,7 @@ public class Main {
         SexRatioEntity[] sortedData = utils.getElementsSorted(data);
 
 
-    }
+    }*/
 
     private void calculateSortTimes(){
         SexRatioEntity[] data_with_100 = loadInfo(100);
@@ -46,12 +46,14 @@ public class Main {
         algorithmsTimes[1] = algorithmsTimeWith1000;
         algorithmsTimes[2] = algorithmsTimeWith10000;
 
-        System.out.println("Tempo decorrido para cada algoritmo com 100 elementos (em milissegundos) :");
-        System.out.println(algorithmsTimeWith100.toString());
-        System.out.println("Tempo decorrido para cada algoritmo com 1000 elementos (em milissegundos) :");
-        System.out.println(algorithmsTimeWith1000.toString());
-        System.out.println("Tempo decorrido para cada algoritmo com 10000 elementos (em milissegundos) :");
-        System.out.println(algorithmsTimeWith10000.toString());
+//        System.out.println("Tempo decorrido para cada algoritmo com 100 elementos (em milissegundos) :");
+//        System.out.println(algorithmsTimeWith100.toString());
+//        System.out.println("Tempo decorrido para cada algoritmo com 1000 elementos (em milissegundos) :");
+//        System.out.println(algorithmsTimeWith1000.toString());
+//        System.out.println("Tempo decorrido para cada algoritmo com 10000 elementos (em milissegundos) :");
+//        System.out.println(algorithmsTimeWith10000.toString());
+
+        System.out.println("Ordenação pronta, o resultado pode ser obtido em 'resources/'" + PERSISTENCE_FILE_NAME + "'");
 
         persistenceResults(algorithmsTimes);
     }
@@ -134,25 +136,97 @@ public class Main {
             //i=0, elements number = 100
             //i=1, elements number = 1000
             //i=2, elements number = 10000
-            writer.append(SortUtils.INSERTION_SORT_LINEAR_KEY + ", numerico, 100, " + algorithTimes[0].get(SortUtils.INSERTION_SORT_LINEAR_KEY) + "\n");
-            writer.append(SortUtils.INSERTION_SORT_LINEAR_KEY + ", numerico, 1000, " + algorithTimes[1].get(SortUtils.INSERTION_SORT_LINEAR_KEY) + "\n");
-            writer.append(SortUtils.INSERTION_SORT_LINEAR_KEY + ", numerico, 10000, " + algorithTimes[2].get(SortUtils.INSERTION_SORT_LINEAR_KEY) + "\n");
 
-            writer.append(SortUtils.INSERTION_SORT_BINARY_KEY + ", numerico, 100, " + algorithTimes[0].get(SortUtils.INSERTION_SORT_BINARY_KEY) + "\n");
-            writer.append(SortUtils.INSERTION_SORT_BINARY_KEY + ", numerico, 1000, " + algorithTimes[1].get(SortUtils.INSERTION_SORT_BINARY_KEY) + "\n");
-            writer.append(SortUtils.INSERTION_SORT_BINARY_KEY + ", numerico, 10000, " + algorithTimes[2].get(SortUtils.INSERTION_SORT_BINARY_KEY) + "\n");
+            //'ISBL', 'numerico', elements, time
+            writer.append(SortUtils.INSERTION_SORT_LINEAR_KEY + SortUtils.NUMERIC_SUFIX + ", 100, " + algorithTimes[0].get(SortUtils.INSERTION_SORT_LINEAR_KEY + SortUtils.NUMERIC_SUFIX) + "\n");
+            writer.append(SortUtils.INSERTION_SORT_LINEAR_KEY + SortUtils.NUMERIC_SUFIX + ", 1000, " + algorithTimes[1].get(SortUtils.INSERTION_SORT_LINEAR_KEY + SortUtils.NUMERIC_SUFIX) + "\n");
+            writer.append(SortUtils.INSERTION_SORT_LINEAR_KEY + SortUtils.NUMERIC_SUFIX + ", 10000, " + algorithTimes[2].get(SortUtils.INSERTION_SORT_LINEAR_KEY + SortUtils.NUMERIC_SUFIX) + "\n\n");
 
-            writer.append(SortUtils.BUBBLE_SORT_KEY + ", numerico, 100, " + algorithTimes[0].get(SortUtils.BUBBLE_SORT_KEY) + "\n");
-            writer.append(SortUtils.BUBBLE_SORT_KEY + ", numerico, 1000, " + algorithTimes[1].get(SortUtils.BUBBLE_SORT_KEY) + "\n");
-            writer.append(SortUtils.BUBBLE_SORT_KEY + ", numerico, 10000, " + algorithTimes[2].get(SortUtils.BUBBLE_SORT_KEY) + "\n");
+            //'ISBL', 'categorico', elements, time
+            writer.append(SortUtils.INSERTION_SORT_LINEAR_KEY + SortUtils.STRING_SUFIX + ", 100, " + algorithTimes[0].get(SortUtils.INSERTION_SORT_LINEAR_KEY + SortUtils.STRING_SUFIX) + "\n");
+            writer.append(SortUtils.INSERTION_SORT_LINEAR_KEY + SortUtils.STRING_SUFIX + ", 1000, " + algorithTimes[1].get(SortUtils.INSERTION_SORT_LINEAR_KEY + SortUtils.STRING_SUFIX) + "\n");
+            writer.append(SortUtils.INSERTION_SORT_LINEAR_KEY + SortUtils.STRING_SUFIX + ", 10000, " + algorithTimes[2].get(SortUtils.INSERTION_SORT_LINEAR_KEY + SortUtils.STRING_SUFIX) + "\n\n\n\n");
 
-            writer.append(SortUtils.SHELL_SORT_KEY + ", numerico, 100, " + algorithTimes[0].get(SortUtils.SHELL_SORT_KEY) + "\n");
-            writer.append(SortUtils.SHELL_SORT_KEY + ", numerico, 1000, " + algorithTimes[1].get(SortUtils.SHELL_SORT_KEY) + "\n");
-            writer.append(SortUtils.SHELL_SORT_KEY + ", numerico, 10000, " + algorithTimes[2].get(SortUtils.SHELL_SORT_KEY) + "\n");
 
-//            writer.append(SortUtils.INSERTION_SORT_LINEAR_KEY + ", numerico, 100, " + algorithTimes[0].get(SortUtils.INSERTION_SORT_LINEAR_KEY) + "\n");
-//            writer.append(SortUtils.INSERTION_SORT_LINEAR_KEY + ", numerico, 1000, " + algorithTimes[1].get(SortUtils.INSERTION_SORT_LINEAR_KEY) + "\n");
-//            writer.append(SortUtils.INSERTION_SORT_LINEAR_KEY + ", numerico, 10000, " + algorithTimes[2].get(SortUtils.INSERTION_SORT_LINEAR_KEY) + "\n");
+            //'ISBB', 'numerico', elements, time
+            writer.append(SortUtils.INSERTION_SORT_BINARY_KEY + SortUtils.NUMERIC_SUFIX + ", 100, " + algorithTimes[0].get(SortUtils.INSERTION_SORT_BINARY_KEY + SortUtils.NUMERIC_SUFIX) + "\n");
+            writer.append(SortUtils.INSERTION_SORT_BINARY_KEY + SortUtils.NUMERIC_SUFIX + ", 1000, " + algorithTimes[1].get(SortUtils.INSERTION_SORT_BINARY_KEY + SortUtils.NUMERIC_SUFIX) + "\n");
+            writer.append(SortUtils.INSERTION_SORT_BINARY_KEY + SortUtils.NUMERIC_SUFIX + ", 10000, " + algorithTimes[2].get(SortUtils.INSERTION_SORT_BINARY_KEY + SortUtils.NUMERIC_SUFIX) + "\n\n");
+
+            //'ISBB', 'categorico', elements, time
+            writer.append(SortUtils.INSERTION_SORT_BINARY_KEY + SortUtils.STRING_SUFIX + ", 100, " + algorithTimes[0].get(SortUtils.INSERTION_SORT_BINARY_KEY + SortUtils.STRING_SUFIX) + "\n");
+            writer.append(SortUtils.INSERTION_SORT_BINARY_KEY + SortUtils.STRING_SUFIX + ", 1000, " + algorithTimes[1].get(SortUtils.INSERTION_SORT_BINARY_KEY + SortUtils.STRING_SUFIX) + "\n");
+            writer.append(SortUtils.INSERTION_SORT_BINARY_KEY + SortUtils.STRING_SUFIX + ", 10000, " + algorithTimes[2].get(SortUtils.INSERTION_SORT_BINARY_KEY + SortUtils.STRING_SUFIX) + "\n\n\n");
+
+
+            //'BBST', 'numerico', elements, time
+            writer.append(SortUtils.BUBBLE_SORT_KEY + SortUtils.NUMERIC_SUFIX + ", 100, " + algorithTimes[0].get(SortUtils.BUBBLE_SORT_KEY + SortUtils.NUMERIC_SUFIX) + "\n");
+            writer.append(SortUtils.BUBBLE_SORT_KEY + SortUtils.NUMERIC_SUFIX + ", 1000, " + algorithTimes[1].get(SortUtils.BUBBLE_SORT_KEY + SortUtils.NUMERIC_SUFIX) + "\n");
+            writer.append(SortUtils.BUBBLE_SORT_KEY + SortUtils.NUMERIC_SUFIX + ", 10000, " + algorithTimes[2].get(SortUtils.BUBBLE_SORT_KEY + SortUtils.NUMERIC_SUFIX) + "\n\n");
+
+            //'BBST', 'categorico', elements, time
+            writer.append(SortUtils.BUBBLE_SORT_KEY + SortUtils.STRING_SUFIX + ", 100, " + algorithTimes[0].get(SortUtils.BUBBLE_SORT_KEY + SortUtils.STRING_SUFIX) + "\n");
+            writer.append(SortUtils.BUBBLE_SORT_KEY + SortUtils.STRING_SUFIX + ", 1000, " + algorithTimes[1].get(SortUtils.BUBBLE_SORT_KEY + SortUtils.STRING_SUFIX) + "\n");
+            writer.append(SortUtils.BUBBLE_SORT_KEY + SortUtils.STRING_SUFIX + ", 10000, " + algorithTimes[2].get(SortUtils.BUBBLE_SORT_KEY + SortUtils.STRING_SUFIX) + "\n\n\n\n");
+
+
+            //'SHST', 'numerico', elements, time
+            writer.append(SortUtils.SHELL_SORT_KEY + SortUtils.NUMERIC_SUFIX + ", 100, " + algorithTimes[0].get(SortUtils.SHELL_SORT_KEY + SortUtils.NUMERIC_SUFIX) + "\n");
+            writer.append(SortUtils.SHELL_SORT_KEY + SortUtils.NUMERIC_SUFIX + ", 1000, " + algorithTimes[1].get(SortUtils.SHELL_SORT_KEY + SortUtils.NUMERIC_SUFIX) + "\n");
+            writer.append(SortUtils.SHELL_SORT_KEY + SortUtils.NUMERIC_SUFIX + ", 10000, " + algorithTimes[2].get(SortUtils.SHELL_SORT_KEY + SortUtils.NUMERIC_SUFIX) + "\n\n");
+
+            //'SHST', 'categorico', elements, time
+            writer.append(SortUtils.SHELL_SORT_KEY + SortUtils.STRING_SUFIX + ", 100, " + algorithTimes[0].get(SortUtils.SHELL_SORT_KEY + SortUtils.STRING_SUFIX) + "\n");
+            writer.append(SortUtils.SHELL_SORT_KEY + SortUtils.STRING_SUFIX + ", 1000, " + algorithTimes[1].get(SortUtils.SHELL_SORT_KEY + SortUtils.STRING_SUFIX) + "\n");
+            writer.append(SortUtils.SHELL_SORT_KEY + SortUtils.STRING_SUFIX + ", 10000, " + algorithTimes[2].get(SortUtils.SHELL_SORT_KEY + SortUtils.STRING_SUFIX) + "\n\n\n\n");
+
+
+
+            //'QSRM', 'numerico', elements, time
+            writer.append(SortUtils.QUICK_SORT_KEY + SortUtils.NUMERIC_SUFIX + ", 100, " + algorithTimes[0].get(SortUtils.QUICK_SORT_KEY + SortUtils.NUMERIC_SUFIX) + "\n");
+            writer.append(SortUtils.QUICK_SORT_KEY + SortUtils.NUMERIC_SUFIX + ", 1000, " + algorithTimes[1].get(SortUtils.QUICK_SORT_KEY + SortUtils.NUMERIC_SUFIX) + "\n");
+            writer.append(SortUtils.QUICK_SORT_KEY + SortUtils.NUMERIC_SUFIX + ", 10000, " + algorithTimes[2].get(SortUtils.QUICK_SORT_KEY + SortUtils.NUMERIC_SUFIX) + "\n\n");
+
+            //'QSRM', 'categorico', elements, time
+            writer.append(SortUtils.QUICK_SORT_KEY + SortUtils.STRING_SUFIX + ", 100, " + algorithTimes[0].get(SortUtils.QUICK_SORT_KEY + SortUtils.STRING_SUFIX) + "\n");
+            writer.append(SortUtils.QUICK_SORT_KEY + SortUtils.STRING_SUFIX + ", 1000, " + algorithTimes[1].get(SortUtils.QUICK_SORT_KEY + SortUtils.STRING_SUFIX) + "\n");
+            writer.append(SortUtils.QUICK_SORT_KEY + SortUtils.STRING_SUFIX + ", 10000, " + algorithTimes[2].get(SortUtils.QUICK_SORT_KEY + SortUtils.STRING_SUFIX) + "\n\n\n\n");
+
+
+
+            //'MGST', 'numerico', elements, time
+            writer.append(SortUtils.MERGE_SORT_KEY + SortUtils.NUMERIC_SUFIX + ", 100, " + algorithTimes[0].get(SortUtils.MERGE_SORT_KEY + SortUtils.NUMERIC_SUFIX) + "\n");
+            writer.append(SortUtils.MERGE_SORT_KEY + SortUtils.NUMERIC_SUFIX + ", 1000, " + algorithTimes[1].get(SortUtils.MERGE_SORT_KEY + SortUtils.NUMERIC_SUFIX) + "\n");
+            writer.append(SortUtils.MERGE_SORT_KEY + SortUtils.NUMERIC_SUFIX + ", 10000, " + algorithTimes[2].get(SortUtils.MERGE_SORT_KEY + SortUtils.NUMERIC_SUFIX) + "\n\n");
+
+            //'MGST', 'categorico', elements, time
+            writer.append(SortUtils.MERGE_SORT_KEY + SortUtils.STRING_SUFIX + ", 100, " + algorithTimes[0].get(SortUtils.MERGE_SORT_KEY + SortUtils.STRING_SUFIX) + "\n");
+            writer.append(SortUtils.MERGE_SORT_KEY + SortUtils.STRING_SUFIX + ", 1000, " + algorithTimes[1].get(SortUtils.MERGE_SORT_KEY + SortUtils.STRING_SUFIX) + "\n");
+            writer.append(SortUtils.MERGE_SORT_KEY + SortUtils.STRING_SUFIX + ", 10000, " + algorithTimes[2].get(SortUtils.MERGE_SORT_KEY + SortUtils.STRING_SUFIX) + "\n\n\n\n");
+
+
+
+//            //'HPST', 'numerico', elements, time
+//            writer.append(SortUtils.HEAP_SORT_KEY + SortUtils.NUMERIC_SUFIX + ", 100, " + algorithTimes[0].get(SortUtils.HEAP_SORT_KEY + SortUtils.NUMERIC_SUFIX) + "\n");
+//            writer.append(SortUtils.HEAP_SORT_KEY + SortUtils.NUMERIC_SUFIX + ", 1000, " + algorithTimes[1].get(SortUtils.HEAP_SORT_KEY + SortUtils.NUMERIC_SUFIX) + "\n");
+//            writer.append(SortUtils.HEAP_SORT_KEY + SortUtils.NUMERIC_SUFIX + ", 10000, " + algorithTimes[2].get(SortUtils.HEAP_SORT_KEY + SortUtils.NUMERIC_SUFIX) + "\n");
+//
+//            //'HPST', 'categorico', elements, time
+//            writer.append(SortUtils.HEAP_SORT_KEY + SortUtils.STRING_SUFIX + ", 100, " + algorithTimes[0].get(SortUtils.HEAP_SORT_KEY + SortUtils.STRING_SUFIX) + "\n");
+//            writer.append(SortUtils.HEAP_SORT_KEY + SortUtils.STRING_SUFIX + ", 1000, " + algorithTimes[1].get(SortUtils.HEAP_SORT_KEY + SortUtils.STRING_SUFIX) + "\n");
+//            writer.append(SortUtils.HEAP_SORT_KEY + SortUtils.STRING_SUFIX + ", 10000, " + algorithTimes[2].get(SortUtils.HEAP_SORT_KEY + SortUtils.STRING_SUFIX) + "\n");
+//
+//
+//
+//            //'RMSD', 'numerico', elements, time
+//            writer.append(SortUtils.RADIX_SORT_KEY + SortUtils.NUMERIC_SUFIX + ", 100, " + algorithTimes[0].get(SortUtils.RADIX_SORT_KEY + SortUtils.NUMERIC_SUFIX) + "\n");
+//            writer.append(SortUtils.RADIX_SORT_KEY + SortUtils.NUMERIC_SUFIX + ", 1000, " + algorithTimes[1].get(SortUtils.RADIX_SORT_KEY + SortUtils.NUMERIC_SUFIX) + "\n");
+//            writer.append(SortUtils.RADIX_SORT_KEY + SortUtils.NUMERIC_SUFIX + ", 10000, " + algorithTimes[2].get(SortUtils.RADIX_SORT_KEY + SortUtils.NUMERIC_SUFIX) + "\n");
+//
+//            //'RMSD', 'categorico', elements, time
+//            writer.append(SortUtils.RADIX_SORT_KEY + SortUtils.STRING_SUFIX + ", 100, " + algorithTimes[0].get(SortUtils.RADIX_SORT_KEY + SortUtils.STRING_SUFIX) + "\n");
+//            writer.append(SortUtils.RADIX_SORT_KEY + SortUtils.STRING_SUFIX + ", 1000, " + algorithTimes[1].get(SortUtils.RADIX_SORT_KEY + SortUtils.STRING_SUFIX) + "\n");
+//            writer.append(SortUtils.RADIX_SORT_KEY + SortUtils.STRING_SUFIX + ", 10000, " + algorithTimes[2].get(SortUtils.RADIX_SORT_KEY + SortUtils.STRING_SUFIX) + "\n");
 
             writer.close();
 
@@ -179,7 +253,7 @@ public class Main {
 
     public static void main(String args[]){
         Main caller = new Main();
-        caller.startSort();
+       // caller.startSort();
         caller.calculateSortTimes();
     }
 
