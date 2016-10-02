@@ -19,21 +19,37 @@ public class SortUtils {
     public static final String QUICK_SORT_KEY = "QSRM";
     public static final String MERGE_SORT_KEY = "MGST";
     public static final String HEAP_SORT_KEY = "HPST";
-    public static final String RADIX_SORT_MSD = "RMSD";
+    public static final String RADIX_SORT_KEY = "RMSD";
 
+    public static final String STRING_SUFIX = ", categorico";
+    public static final String NUMERIC_SUFIX = ", numerico";
 
     public Map<String, String> sortByAllAlgorithms(SexRatioEntity data[]) {
 
         Map<String, String> sortTimes = new HashMap<>();
 
-        sortTimes.put(INSERTION_SORT_LINEAR_KEY, String.valueOf(linearInsertionSort(data))); //Insertion Sort com Busca Linear
-        sortTimes.put(INSERTION_SORT_BINARY_KEY, String.valueOf(binaryInsertionSort(data, data.length))); //Insertion Sort com Busca Binária
-        sortTimes.put(BUBBLE_SORT_KEY, String.valueOf(bubbleSort(data))); //Bubble Sort
-        sortTimes.put(SHELL_SORT_KEY, String.valueOf(shellSort(data))); //Shell Sort
-        sortTimes.put(QUICK_SORT_KEY, String.valueOf(quickSortRandon(data))); //quick Sort Randomizado
-        sortTimes.put(MERGE_SORT_KEY, String.valueOf(mergeSort(data))); //Merge Sort
-//        sortTimes.put(HEAP_SORT_KEY, String.valueOf(heapSort(data))); //Shell Sort
-//        sortTimes.put(RADIX_SORT_MSD, String.valueOf(radixSort(data))); //Shell Sort
+        sortTimes.put(INSERTION_SORT_LINEAR_KEY + NUMERIC_SUFIX, String.valueOf(linearInsertionSort(data))); //Insertion Sort com Busca Linear
+        sortTimes.put(INSERTION_SORT_LINEAR_KEY + STRING_SUFIX, String.valueOf(linearInsertionSortToString(data))); //Insertion Sort com Busca Linear
+
+        sortTimes.put(INSERTION_SORT_BINARY_KEY + NUMERIC_SUFIX, String.valueOf(binaryInsertionSort(data, data.length))); //Insertion Sort com Busca Binária
+        sortTimes.put(INSERTION_SORT_BINARY_KEY + STRING_SUFIX, String.valueOf(binaryInsertionSortToString(data, data.length))); //Insertion Sort com Busca Binária
+
+        sortTimes.put(BUBBLE_SORT_KEY + NUMERIC_SUFIX, String.valueOf(bubbleSort(data))); //Bubble Sort
+        sortTimes.put(BUBBLE_SORT_KEY + STRING_SUFIX, String.valueOf(bubbleSortToString(data))); //Bubble Sort
+
+        sortTimes.put(SHELL_SORT_KEY + NUMERIC_SUFIX, String.valueOf(shellSort(data))); //Shell Sort
+        sortTimes.put(SHELL_SORT_KEY + STRING_SUFIX, String.valueOf(shellSortToString(data))); //Shell Sort
+
+        sortTimes.put(QUICK_SORT_KEY + NUMERIC_SUFIX, String.valueOf(quickSortRandon(data))); //quick Sort Randomizado
+        sortTimes.put(QUICK_SORT_KEY + STRING_SUFIX, String.valueOf(quickSortRandonToString(data))); //quick Sort Randomizado
+
+        sortTimes.put(MERGE_SORT_KEY + NUMERIC_SUFIX, String.valueOf(mergeSort(data))); //Merge Sort
+        sortTimes.put(MERGE_SORT_KEY + STRING_SUFIX, String.valueOf(mergeSortToString(data))); //Merge Sort
+
+//        sortTimes.put(HEAP_SORT_KEY + NUMERIC_SUFIX, String.valueOf(heapSort(data))); //Shell Sort
+//        sortTimes.put(HEAP_SORT_KEY + STRING_SUFIX, String.valueOf(heapSortToString(data))); //Shell Sort
+
+//        sortTimes.put(RADIX_SORT_KEY + STRING_SUFIX, String.valueOf(radixSort(data))); //Shell Sort
 
         return sortTimes;
 
@@ -292,7 +308,7 @@ public class SortUtils {
      * FUNCIOMENTO: Implementado o Inserção direta com busca linear
      * MATERIAL DE APOIO: http://www.devmedia.com.br/algoritmos-de-ordenacao-em-java/32693
      */
-    private long linearInsertionSorttoString(SexRatioEntity data[]) {
+    private long linearInsertionSortToString(SexRatioEntity data[]) {
 
         long startTime = System.currentTimeMillis();
 
@@ -318,7 +334,7 @@ public class SortUtils {
      * FUNCIOMENTO: Implementado o Inserção direta com busca binária
      * MATERIAL DE APOIO:  http://stackoverflow.com/questions/3075752/binary-insertion-sort-algorithm
      */
-    private long binaryInsertionSorttoString(SexRatioEntity data[], int n) {
+    private long binaryInsertionSortToString(SexRatioEntity data[], int n) {
 
         long startTime = System.currentTimeMillis();
         for (int i = 0; i < n; ++i) {
@@ -333,14 +349,14 @@ public class SortUtils {
                     right = middle;
             }
             for (int j = i; j > left; --j) {
-                swaptoString(data, j - 1, j);
+                swapToString(data, j - 1, j);
             }
         }
         long elapsedTime = System.currentTimeMillis() - startTime;
         return elapsedTime;
     }
 
-    public static void swaptoString(SexRatioEntity a[], int i, int j) {
+    public static void swapToString(SexRatioEntity a[], int i, int j) {
         SexRatioEntity k = a[i];
         a[i] = a[j];
         a[j] = k;
@@ -352,7 +368,7 @@ public class SortUtils {
      * FUNCIONAMENTO: Foi implementado o ShellSort tradicional
      * MATERIAL DE APOIO: http://www.devmedia.com.br/algoritmos-de-ordenacao-em-java/32693
      */
-    private long shellSorttoString(SexRatioEntity data[]) {
+    private long shellSortToString(SexRatioEntity data[]) {
 
         long startTime = System.currentTimeMillis();
 
@@ -385,7 +401,7 @@ public class SortUtils {
      * FUNCIONAMENTO: Foi implementado o BubbleSort tradicional
      * MATERIAL DE APOIO: http://www.devmedia.com.br/algoritmos-de-ordenacao-em-java/32693
      */
-    private long bubbleSorttoString(SexRatioEntity data[]) {
+    private long bubbleSortToString(SexRatioEntity data[]) {
 
         long startTime = System.currentTimeMillis();
 
@@ -413,7 +429,7 @@ public class SortUtils {
      * FUNCIONAMENTO: Randomiza vetor atodo primeiramente e depois aplica o quickSort tradicional,sendo feito apartir de uma função para contagem do tempo.
      * MATERIAL DE APOIO: http://www.devmedia.com.br/algoritmos-de-ordenacao-em-java/32693
      */
-    private long quickSortRandontoString(SexRatioEntity[] data) {
+    private long quickSortRandonToString(SexRatioEntity[] data) {
         long startTime = System.currentTimeMillis();
 
         SexRatioEntity temporaryData;
@@ -425,21 +441,21 @@ public class SortUtils {
             data[i] = data[posicao];
             data[posicao] = temporaryData;
         }
-        quickSortOperationtoString(data, 0, data.length - 1);
+        quickSortOperationToString(data, 0, data.length - 1);
 
         long elapsedTime = System.currentTimeMillis() - startTime;
         return elapsedTime;
     }
 
-    private static void quickSortOperationtoString(SexRatioEntity[] data, int start, int fim) {
+    private static void quickSortOperationToString(SexRatioEntity[] data, int start, int fim) {
         if (start < fim) {
-            int Point = discoveryPointtoString(data, start, fim);
-            quickSortOperationtoString(data, start, Point - 1);
-            quickSortOperationtoString(data, Point + 1, fim);
+            int Point = discoveryPointToString(data, start, fim);
+            quickSortOperationToString(data, start, Point - 1);
+            quickSortOperationToString(data, Point + 1, fim);
         }
     }
 
-    private static int discoveryPointtoString(SexRatioEntity[] data, int start, int fim) {
+    private static int discoveryPointToString(SexRatioEntity[] data, int start, int fim) {
         SexRatioEntity middle = data[start];
         int i = start + 1, f = fim;
         while (i <= f) {
@@ -466,30 +482,30 @@ public class SortUtils {
      * FUNCIONAMENTO: Implementação do MergeSort tradicional, sendo feito apartir de uma função para contagem do tempo.
      * MATERIAL DE APOIO: http://stackoverflow.com/questions/13727030/mergesort-in-java
      */
-    static long mergeSorttoString(SexRatioEntity[] data){
+    static long mergeSortToString(SexRatioEntity[] data){
         long startTime = System.currentTimeMillis();
 
-        mergeSortAplicationtoString(data);
+        mergeSortAplicationToString(data);
 
         long elapsedTime = System.currentTimeMillis() - startTime;
         return elapsedTime;
     }
 
-    static void mergeSortAplicationtoString(SexRatioEntity[] data) {
+    static void mergeSortAplicationToString(SexRatioEntity[] data) {
         if (data.length > 1) {
             int middle = data.length/2;
 
             SexRatioEntity[] leftArray = Arrays.copyOfRange(data, 0, middle);
             SexRatioEntity[] rightArray = Arrays.copyOfRange(data,middle,data.length);
 
-            mergeSortAplicationtoString(leftArray);
-            mergeSortAplicationtoString(rightArray);
+            mergeSortAplicationToString(leftArray);
+            mergeSortAplicationToString(rightArray);
 
-            mergetoString(data,leftArray,rightArray);
+            mergeToString(data,leftArray,rightArray);
         }
     }
 
-    static void mergetoString(SexRatioEntity[] data, SexRatioEntity[] leftData, SexRatioEntity[] rightData) {
+    static void mergeToString(SexRatioEntity[] data, SexRatioEntity[] leftData, SexRatioEntity[] rightData) {
         int totElem = leftData.length + rightData.length;
         int i,left_i,right_i;
         i = left_i = right_i = 0;
