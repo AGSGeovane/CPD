@@ -206,15 +206,15 @@ public class Main {
 
 
 
-//            //'HPST', 'numerico', elements, time
-//            writer.append(SortUtils.HEAP_SORT_KEY + SortUtils.NUMERIC_SUFIX + ", 100, " + algorithTimes[0].get(SortUtils.HEAP_SORT_KEY + SortUtils.NUMERIC_SUFIX) + "\n");
-//            writer.append(SortUtils.HEAP_SORT_KEY + SortUtils.NUMERIC_SUFIX + ", 1000, " + algorithTimes[1].get(SortUtils.HEAP_SORT_KEY + SortUtils.NUMERIC_SUFIX) + "\n");
-//            writer.append(SortUtils.HEAP_SORT_KEY + SortUtils.NUMERIC_SUFIX + ", 10000, " + algorithTimes[2].get(SortUtils.HEAP_SORT_KEY + SortUtils.NUMERIC_SUFIX) + "\n");
+            //'HPST', 'numerico', elements, time
+            writer.append(SortUtils.HEAP_SORT_KEY + SortUtils.NUMERIC_SUFIX + ", 100, " + algorithTimes[0].get(SortUtils.HEAP_SORT_KEY + SortUtils.NUMERIC_SUFIX) + "\n");
+            writer.append(SortUtils.HEAP_SORT_KEY + SortUtils.NUMERIC_SUFIX + ", 1000, " + algorithTimes[1].get(SortUtils.HEAP_SORT_KEY + SortUtils.NUMERIC_SUFIX) + "\n");
+            writer.append(SortUtils.HEAP_SORT_KEY + SortUtils.NUMERIC_SUFIX + ", 10000, " + algorithTimes[2].get(SortUtils.HEAP_SORT_KEY + SortUtils.NUMERIC_SUFIX) + "\n\n");
 //
-//            //'HPST', 'categorico', elements, time
-//            writer.append(SortUtils.HEAP_SORT_KEY + SortUtils.STRING_SUFIX + ", 100, " + algorithTimes[0].get(SortUtils.HEAP_SORT_KEY + SortUtils.STRING_SUFIX) + "\n");
-//            writer.append(SortUtils.HEAP_SORT_KEY + SortUtils.STRING_SUFIX + ", 1000, " + algorithTimes[1].get(SortUtils.HEAP_SORT_KEY + SortUtils.STRING_SUFIX) + "\n");
-//            writer.append(SortUtils.HEAP_SORT_KEY + SortUtils.STRING_SUFIX + ", 10000, " + algorithTimes[2].get(SortUtils.HEAP_SORT_KEY + SortUtils.STRING_SUFIX) + "\n");
+            //'HPST', 'categorico', elements, time
+            writer.append(SortUtils.HEAP_SORT_KEY + SortUtils.STRING_SUFIX + ", 100, " + algorithTimes[0].get(SortUtils.HEAP_SORT_KEY + SortUtils.STRING_SUFIX) + "\n");
+            writer.append(SortUtils.HEAP_SORT_KEY + SortUtils.STRING_SUFIX + ", 1000, " + algorithTimes[1].get(SortUtils.HEAP_SORT_KEY + SortUtils.STRING_SUFIX) + "\n");
+            writer.append(SortUtils.HEAP_SORT_KEY + SortUtils.STRING_SUFIX + ", 10000, " + algorithTimes[2].get(SortUtils.HEAP_SORT_KEY + SortUtils.STRING_SUFIX) + "\n\n\n\n");
 //
 //
 //
