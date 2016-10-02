@@ -12,6 +12,7 @@ import java.util.Map;
 public class SortDAO {
 
     public static final String CSV_FILE_PATH = "C:\\BitBucket\\CPD\\CPDProject\\resources\\database.txt";
+    public static final String FILE_RELATIVE_PATH = "database.txt";
     //    public static final String CSV_FILE_PATH = "C:\\Users\\Fabricio Szczesny\\Documents\\CPD\\CPDProject\\resources\\database.csv";
     public static final String PERSISTENCE_FILE_NAME = "resultados_Iluminados.txt";
     public static final int UNLIMITED_ELEMENTES_FLAG = -1;
@@ -28,11 +29,14 @@ public class SortDAO {
 
     private SexRatioEntity[] loadInfo(int maxFileSize, boolean isValidSize) {
 
-        File csvFile = new File(CSV_FILE_PATH);
         try {
-            BufferedReader br = new BufferedReader(new FileReader(csvFile));
 
-            int fileSize = countLines(CSV_FILE_PATH) - 1;
+            ClassLoader classLoader = getClass().getClassLoader();
+            File databaseFile = new File(classLoader.getResource(FILE_RELATIVE_PATH).getFile());
+
+            BufferedReader br = new BufferedReader(new FileReader(databaseFile));
+
+            int fileSize = countLines(databaseFile.getAbsolutePath()) - 1;
 
             //Relevant infos position from csv: 2 - UF; 3 - City; 5 - Male; 6 - Female; 7 - Ratio
             //Uses readLine for the first time to remove the header
