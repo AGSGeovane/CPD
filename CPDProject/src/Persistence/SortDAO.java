@@ -11,9 +11,7 @@ import java.util.Map;
  */
 public class SortDAO {
 
-    public static final String CSV_FILE_PATH = "C:\\BitBucket\\CPD\\CPDProject\\resources\\database.txt";
     public static final String FILE_RELATIVE_PATH = "database.txt";
-    //    public static final String CSV_FILE_PATH = "C:\\Users\\Fabricio Szczesny\\Documents\\CPD\\CPDProject\\resources\\database.csv";
     public static final String PERSISTENCE_FILE_NAME = "resultados_Iluminados.txt";
     public static final int UNLIMITED_ELEMENTES_FLAG = -1;
 
