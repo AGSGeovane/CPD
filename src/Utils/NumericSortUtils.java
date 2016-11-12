@@ -322,4 +322,137 @@ public class NumericSortUtils extends AbstractSortUtils {
 
         return data;
     }
+
+
+    //@Override
+    /**HeapSort e funções auxiliares
+     * Created by Fabricio Almeida on 12/11/2016.
+     * FUNCIONAMENTO: Implementação do HeapSort tradicional, sendo feito apartir de uma função para contagem do tempo.
+     * MATERIAL DE APOIO: http://www.code2learn.com/2011/09/heapsort-array-based-implementation-in.html
+     */
+    public long heapSortFemalePopulation(SexRatioEntity[] data) {
+
+        SexRatioEntity[] dataClone = data.clone();
+
+        long startTime = System.currentTimeMillis();
+
+        SexRatioEntity[] heap = buildheapFemalePopulation(dataClone);
+
+        int n = heap.length - 1;
+
+        for (int i = n; i > 0; i--) {
+            SexRatioEntity aux = heap[0];
+            heap[0] = heap[i];
+            heap[i] = aux;
+            n = n - 1;
+            heap = maxheapFemalePopulation(heap, 0, n);
+        }
+
+        long elapsedTime = System.currentTimeMillis() - startTime;
+
+
+        return elapsedTime;
+    }
+
+    private SexRatioEntity[] buildheapFemalePopulation(SexRatioEntity[] data) {
+
+        int n = data.length - 1;
+        for (int i = n / 2; i >= 0; i--) {
+            data = maxheapFemalePopulation(data, i, n);
+        }
+
+        return data;
+    }
+
+    private SexRatioEntity[] maxheapFemalePopulation(SexRatioEntity[] data, int i, int buildHeapSize) {
+
+        int left = 2 * i;
+        int right = (2 * i) + 1;
+
+        int largest;
+
+        if (left <= buildHeapSize && data[left].getFemalePopulation() > data[i].getFemalePopulation()) {
+            largest = left;
+        } else {
+            largest = i;
+        }
+
+        if (right <= buildHeapSize && data[right].getFemalePopulation() > data[largest].getFemalePopulation()) {
+            largest = right;
+        }
+        if (largest != i) {
+            SexRatioEntity aux = data[i];
+            data[i] = data[largest];
+            data[largest] = aux;
+            data = maxheapFemalePopulation(data, largest, buildHeapSize);
+        }
+
+        return data;
+    }
+
+    //@Override
+    /**HeapSort e funções auxiliares
+     * Created by Fabricio Almeida on 12/11/2016.
+     * FUNCIONAMENTO: Implementação do HeapSort tradicional, sendo feito apartir de uma função para contagem do tempo.
+     * MATERIAL DE APOIO: http://www.code2learn.com/2011/09/heapsort-array-based-implementation-in.html
+     */
+    public long heapSortMalePopulation(SexRatioEntity[] data) {
+
+        SexRatioEntity[] dataClone = data.clone();
+
+        long startTime = System.currentTimeMillis();
+
+        SexRatioEntity[] heap = buildheapMalePopulation(dataClone);
+
+        int n = heap.length - 1;
+
+        for (int i = n; i > 0; i--) {
+            SexRatioEntity aux = heap[0];
+            heap[0] = heap[i];
+            heap[i] = aux;
+            n = n - 1;
+            heap = maxheapMalePopulation(heap, 0, n);
+        }
+
+        long elapsedTime = System.currentTimeMillis() - startTime;
+
+
+        return elapsedTime;
+    }
+
+    private SexRatioEntity[] buildheapMalePopulation(SexRatioEntity[] data) {
+
+        int n = data.length - 1;
+        for (int i = n / 2; i >= 0; i--) {
+            data = maxheapMalePopulation(data, i, n);
+        }
+
+        return data;
+    }
+
+    private SexRatioEntity[] maxheapMalePopulation(SexRatioEntity[] data, int i, int buildHeapSize) {
+
+        int left = 2 * i;
+        int right = (2 * i) + 1;
+
+        int largest;
+
+        if (left <= buildHeapSize && data[left].getMalePopulation() > data[i].getMalePopulation()) {
+            largest = left;
+        } else {
+            largest = i;
+        }
+
+        if (right <= buildHeapSize && data[right].getMalePopulation() > data[largest].getMalePopulation()) {
+            largest = right;
+        }
+        if (largest != i) {
+            SexRatioEntity aux = data[i];
+            data[i] = data[largest];
+            data[largest] = aux;
+            data = maxheapMalePopulation(data, largest, buildHeapSize);
+        }
+
+        return data;
+    }
 }
