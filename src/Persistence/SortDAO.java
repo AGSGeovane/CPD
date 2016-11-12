@@ -58,7 +58,7 @@ public class SortDAO {
                 currentEntity.setMalePopulation(Double.parseDouble(splitedEntity[5]));
                 currentEntity.setFemalePopulation(Double.parseDouble(splitedEntity[6]));
                 currentEntity.setRatio(Double.parseDouble(splitedEntity[7]));
-
+                currentEntity.setChave(i+1);
                 data[i] = currentEntity;
 
             }

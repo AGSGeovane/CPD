@@ -11,7 +11,11 @@ public class SexRatioEntity {
     private double malePopulation;
     private double femalePopulation;
     private double ratio;
+    private int chave;
 
+    public  void setChave(int chaveToSet) { this.chave = chaveToSet; }
+
+    public  int getChave() { return chave; }
 
     public String getCityName() {
         return cityName;
