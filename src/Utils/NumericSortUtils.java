@@ -2,6 +2,10 @@ package Utils;
 
 import Entities.SexRatioEntity;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -278,6 +282,7 @@ public class NumericSortUtils extends AbstractSortUtils {
 
         long elapsedTime = System.currentTimeMillis() - startTime;
 
+        creatDictionary(data,"RatioCres.bin","RatioDecres.bin");
 
         return elapsedTime;
     }
@@ -350,6 +355,7 @@ public class NumericSortUtils extends AbstractSortUtils {
 
         long elapsedTime = System.currentTimeMillis() - startTime;
 
+        creatDictionary(data,"FemaleCres.bin","FemaleDecres.bin");
 
         return elapsedTime;
     }
@@ -416,6 +422,7 @@ public class NumericSortUtils extends AbstractSortUtils {
 
         long elapsedTime = System.currentTimeMillis() - startTime;
 
+        creatDictionary(data,"MaleCres.bin","MaleDecres.bin");
 
         return elapsedTime;
     }
@@ -454,5 +461,32 @@ public class NumericSortUtils extends AbstractSortUtils {
         }
 
         return data;
+    }
+
+    public void creatDictionary(SexRatioEntity[] data, String nameFileCrescente, String nameFileDecrescente){
+        try{
+            FileOutputStream fileOS = new FileOutputStream(nameFileCrescente);
+            ObjectOutputStream os = new ObjectOutputStream(fileOS);
+            for(int i=0 ; i<data.length ; i++){
+                os.writeInt(data[i].getChave());
+            }
+            os.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try{
+            FileOutputStream fileOS = new FileOutputStream(nameFileDecrescente);
+            ObjectOutputStream os = new ObjectOutputStream(fileOS);
+            for(int i=(data.length-1) ; i>=0 ; i--){
+                os.writeInt(data[i].getChave());
+            }
+            os.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

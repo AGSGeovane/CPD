@@ -2,6 +2,10 @@ package Utils;
 
 import Entities.SexRatioEntity;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -280,6 +284,8 @@ public class StringSortUtils extends AbstractSortUtils {
 
         long elapsedTime = System.currentTimeMillis() - startTime;
 
+        creatDictionaryString(data,"CityCres.bin","CityDecres.bin");
+
         return elapsedTime;
     }
 
@@ -325,5 +331,32 @@ public class StringSortUtils extends AbstractSortUtils {
         //Must be implemented
 
         return 0;
+    }
+
+    public void creatDictionaryString(SexRatioEntity[] data, String nameFileCrescente, String nameFileDecrescente){
+        try{
+            FileOutputStream fileOS = new FileOutputStream(nameFileCrescente);
+            ObjectOutputStream os = new ObjectOutputStream(fileOS);
+            for(int i=0 ; i<data.length ; i++){
+                os.writeInt(data[i].getChave());
+            }
+            os.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try{
+            FileOutputStream fileOS = new FileOutputStream(nameFileDecrescente);
+            ObjectOutputStream os = new ObjectOutputStream(fileOS);
+            for(int i=(data.length-1) ; i>=0 ; i--){
+                os.writeInt(data[i].getChave());
+            }
+            os.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

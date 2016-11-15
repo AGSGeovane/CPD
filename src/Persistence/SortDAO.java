@@ -7,7 +7,7 @@ import java.io.*;
 import java.util.Map;
 
 /**
- * Created by Geovane on 02/10/2016.
+ * Created by Geovane on 02/10/2016 and edited by Fabricio on 15/11/2016.
  */
 public class SortDAO {
 
@@ -88,7 +88,6 @@ public class SortDAO {
         out.writeDouble(data.getRatio());
         out.writeUTF(data.getCityName());
     }
-
 
     public void persistenceResults(Map<String, String>[] algorithTimes) {
 

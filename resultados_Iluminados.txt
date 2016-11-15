@@ -1,69 +1,69 @@
 ISBL, numerico, 100, 0
-ISBL, numerico, 1000, 3
-ISBL, numerico, 10000, 155
+ISBL, numerico, 1000, 4
+ISBL, numerico, 10000, 139
 
-ISBL, categorico, 100, 0
+ISBL, categorico, 100, 1
 ISBL, categorico, 1000, 6
-ISBL, categorico, 10000, 652
+ISBL, categorico, 10000, 519
 
 
 
-ISBB, numerico, 100, 1
+ISBB, numerico, 100, 0
 ISBB, numerico, 1000, 3
-ISBB, numerico, 10000, 185
+ISBB, numerico, 10000, 177
 
 ISBB, categorico, 100, 0
 ISBB, categorico, 1000, 3
 ISBB, categorico, 10000, 189
 
 
-BBST, numerico, 100, 0
-BBST, numerico, 1000, 8
-BBST, numerico, 10000, 714
+BBST, numerico, 100, 1
+BBST, numerico, 1000, 6
+BBST, numerico, 10000, 490
 
 BBST, categorico, 100, 1
-BBST, categorico, 1000, 18
-BBST, categorico, 10000, 2759
+BBST, categorico, 1000, 17
+BBST, categorico, 10000, 2059
 
 
 
 SHST, numerico, 100, 0
-SHST, numerico, 1000, 1
+SHST, numerico, 1000, 2
 SHST, numerico, 10000, 5
 
 SHST, categorico, 100, 0
-SHST, categorico, 1000, 2
-SHST, categorico, 10000, 14
+SHST, categorico, 1000, 1
+SHST, categorico, 10000, 11
 
 
 
-QSRM, numerico, 100, 1
+QSRM, numerico, 100, 0
 QSRM, numerico, 1000, 2
-QSRM, numerico, 10000, 4
+QSRM, numerico, 10000, 3
 
-QSRM, categorico, 100, 0
+QSRM, categorico, 100, 1
 QSRM, categorico, 1000, 4
-QSRM, categorico, 10000, 10
+QSRM, categorico, 10000, 7
 
 
 
-MGST, numerico, 100, 1
+MGST, numerico, 100, 0
 MGST, numerico, 1000, 2
-MGST, numerico, 10000, 13
+MGST, numerico, 10000, 7
 
 MGST, categorico, 100, 0
 MGST, categorico, 1000, 2
-MGST, categorico, 10000, 18
+MGST, categorico, 10000, 10
 
 
 
-HPST, numerico, 100, 0
+HPST, numerico, 100, 1
 HPST, numerico, 1000, 0
-HPST, numerico, 10000, 8
+HPST, numerico, 10000, 3
 
 HPST, categorico, 100, 0
 HPST, categorico, 1000, 1
-HPST, categorico, 10000, 14
+HPST, categorico, 10000, 8
 
 
 
