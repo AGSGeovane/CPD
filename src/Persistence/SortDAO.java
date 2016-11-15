@@ -13,6 +13,7 @@ public class SortDAO {
 
     public static final String FILE_RELATIVE_PATH = "database.txt";
     public static final String PERSISTENCE_FILE_NAME = "resultados_Iluminados.txt";
+    public static final String FILE_BASE_PATH = "base.bin";
     public static final int UNLIMITED_ELEMENTES_FLAG = -1;
 
     public SexRatioEntity[] loadInfo(int maxFileSize) throws Exception {
@@ -45,7 +46,7 @@ public class SortDAO {
             }
 
             SexRatioEntity[] data = new SexRatioEntity[fileSize];
-
+            DataOutputStream out = openOutputStream(FILE_BASE_PATH);
             for (int i = 0; i < fileSize; i++) {
 
                 currentInfo = br.readLine();
@@ -53,15 +54,16 @@ public class SortDAO {
 
                 String splitedEntity[] = currentInfo.split(",");
 
+                currentEntity.setChave(i + 1);
                 currentEntity.setUf(splitedEntity[2]);
                 currentEntity.setCityName(splitedEntity[3]);
                 currentEntity.setMalePopulation(Double.parseDouble(splitedEntity[5]));
                 currentEntity.setFemalePopulation(Double.parseDouble(splitedEntity[6]));
                 currentEntity.setRatio(Double.parseDouble(splitedEntity[7]));
-                currentEntity.setChave(i+1);
                 data[i] = currentEntity;
-
+                writeData(currentEntity, out);
             }
+            out.close();
             return data;
 
         } catch (FileNotFoundException fnfe) {
@@ -71,6 +73,22 @@ public class SortDAO {
         }
         return null;
     }
+
+    private static DataOutputStream openOutputStream(String name) throws Exception {
+        DataOutputStream out = null;
+        File file = new File(name);
+        out = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
+        return out;
+    }
+
+    private static void writeData(SexRatioEntity data, DataOutputStream out) throws Exception {
+        out.writeInt(data.getChave());
+        out.writeDouble(data.getFemalePopulation());
+        out.writeDouble(data.getMalePopulation());
+        out.writeDouble(data.getRatio());
+        out.writeUTF(data.getCityName());
+    }
+
 
     public void persistenceResults(Map<String, String>[] algorithTimes) {
 
