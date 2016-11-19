@@ -1,11 +1,9 @@
 package Utils;
 
 import Entities.SexRatioEntity;
+import Persistence.SortDAO;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -132,6 +130,59 @@ public class NumericSortUtils extends AbstractSortUtils {
             }
         }
         long elapsedTime = System.currentTimeMillis() - startTime;
+
+        creatDictionary(data,"RatioCres.bin","RatioDecres.bin");
+
+        return elapsedTime;
+    }
+
+    public long bubbleSortFemale(SexRatioEntity data[]) {
+
+        long startTime = System.currentTimeMillis();
+
+        int n = data.length;
+        SexRatioEntity temp;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 1; j < (n - i); j++) {
+
+                if (data[j - 1].getFemalePopulation() > data[j].getFemalePopulation()) {
+                    temp = data[j - 1];
+                    data[j - 1] = data[j];
+                    data[j] = temp;
+                }
+
+            }
+        }
+        long elapsedTime = System.currentTimeMillis() - startTime;
+
+        creatDictionary(data,"FemaleCres.bin","FemaleDecres.bin");
+
+        return elapsedTime;
+    }
+
+    public long bubbleSortMale(SexRatioEntity data[]) {
+
+        long startTime = System.currentTimeMillis();
+
+        int n = data.length;
+        SexRatioEntity temp;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 1; j < (n - i); j++) {
+
+                if (data[j - 1].getMalePopulation() > data[j].getMalePopulation()) {
+                    temp = data[j - 1];
+                    data[j - 1] = data[j];
+                    data[j] = temp;
+                }
+
+            }
+        }
+        long elapsedTime = System.currentTimeMillis() - startTime;
+
+        creatDictionary(data,"MaleCres.bin","MaleDecres.bin");
+
         return elapsedTime;
     }
 
@@ -279,10 +330,7 @@ public class NumericSortUtils extends AbstractSortUtils {
             n = n - 1;
             heap = maxheap(heap, 0, n);
         }
-
         long elapsedTime = System.currentTimeMillis() - startTime;
-
-        creatDictionary(data,"RatioCres.bin","RatioDecres.bin");
 
         return elapsedTime;
     }
@@ -329,164 +377,36 @@ public class NumericSortUtils extends AbstractSortUtils {
     }
 
 
-    //@Override
-    /**HeapSort e funções auxiliares
-     * Created by Fabricio Almeida on 12/11/2016.
-     * FUNCIONAMENTO: Implementação do HeapSort tradicional, sendo feito apartir de uma função para contagem do tempo.
-     * MATERIAL DE APOIO: http://www.code2learn.com/2011/09/heapsort-array-based-implementation-in.html
-     */
-    public long heapSortFemalePopulation(SexRatioEntity[] data) {
-
-        SexRatioEntity[] dataClone = data.clone();
-
-        long startTime = System.currentTimeMillis();
-
-        SexRatioEntity[] heap = buildheapFemalePopulation(dataClone);
-
-        int n = heap.length - 1;
-
-        for (int i = n; i > 0; i--) {
-            SexRatioEntity aux = heap[0];
-            heap[0] = heap[i];
-            heap[i] = aux;
-            n = n - 1;
-            heap = maxheapFemalePopulation(heap, 0, n);
-        }
-
-        long elapsedTime = System.currentTimeMillis() - startTime;
-
-        creatDictionary(data,"FemaleCres.bin","FemaleDecres.bin");
-
-        return elapsedTime;
-    }
-
-    private SexRatioEntity[] buildheapFemalePopulation(SexRatioEntity[] data) {
-
-        int n = data.length - 1;
-        for (int i = n / 2; i >= 0; i--) {
-            data = maxheapFemalePopulation(data, i, n);
-        }
-
-        return data;
-    }
-
-    private SexRatioEntity[] maxheapFemalePopulation(SexRatioEntity[] data, int i, int buildHeapSize) {
-
-        int left = 2 * i;
-        int right = (2 * i) + 1;
-
-        int largest;
-
-        if (left <= buildHeapSize && data[left].getFemalePopulation() > data[i].getFemalePopulation()) {
-            largest = left;
-        } else {
-            largest = i;
-        }
-
-        if (right <= buildHeapSize && data[right].getFemalePopulation() > data[largest].getFemalePopulation()) {
-            largest = right;
-        }
-        if (largest != i) {
-            SexRatioEntity aux = data[i];
-            data[i] = data[largest];
-            data[largest] = aux;
-            data = maxheapFemalePopulation(data, largest, buildHeapSize);
-        }
-
-        return data;
-    }
-
-    //@Override
-    /**HeapSort e funções auxiliares
-     * Created by Fabricio Almeida on 12/11/2016.
-     * FUNCIONAMENTO: Implementação do HeapSort tradicional, sendo feito apartir de uma função para contagem do tempo.
-     * MATERIAL DE APOIO: http://www.code2learn.com/2011/09/heapsort-array-based-implementation-in.html
-     */
-    public long heapSortMalePopulation(SexRatioEntity[] data) {
-
-        SexRatioEntity[] dataClone = data.clone();
-
-        long startTime = System.currentTimeMillis();
-
-        SexRatioEntity[] heap = buildheapMalePopulation(dataClone);
-
-        int n = heap.length - 1;
-
-        for (int i = n; i > 0; i--) {
-            SexRatioEntity aux = heap[0];
-            heap[0] = heap[i];
-            heap[i] = aux;
-            n = n - 1;
-            heap = maxheapMalePopulation(heap, 0, n);
-        }
-
-        long elapsedTime = System.currentTimeMillis() - startTime;
-
-        creatDictionary(data,"MaleCres.bin","MaleDecres.bin");
-
-        return elapsedTime;
-    }
-
-    private SexRatioEntity[] buildheapMalePopulation(SexRatioEntity[] data) {
-
-        int n = data.length - 1;
-        for (int i = n / 2; i >= 0; i--) {
-            data = maxheapMalePopulation(data, i, n);
-        }
-
-        return data;
-    }
-
-    private SexRatioEntity[] maxheapMalePopulation(SexRatioEntity[] data, int i, int buildHeapSize) {
-
-        int left = 2 * i;
-        int right = (2 * i) + 1;
-
-        int largest;
-
-        if (left <= buildHeapSize && data[left].getMalePopulation() > data[i].getMalePopulation()) {
-            largest = left;
-        } else {
-            largest = i;
-        }
-
-        if (right <= buildHeapSize && data[right].getMalePopulation() > data[largest].getMalePopulation()) {
-            largest = right;
-        }
-        if (largest != i) {
-            SexRatioEntity aux = data[i];
-            data[i] = data[largest];
-            data[largest] = aux;
-            data = maxheapMalePopulation(data, largest, buildHeapSize);
-        }
-
-        return data;
-    }
-
     public void creatDictionary(SexRatioEntity[] data, String nameFileCrescente, String nameFileDecrescente){
         try{
-            FileOutputStream fileOS = new FileOutputStream(nameFileCrescente);
-            ObjectOutputStream os = new ObjectOutputStream(fileOS);
+            DataOutputStream os= openOutputStreamTwo(nameFileCrescente);
             for(int i=0 ; i<data.length ; i++){
                 os.writeInt(data[i].getChave());
             }
             os.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         try{
-            FileOutputStream fileOS = new FileOutputStream(nameFileDecrescente);
-            ObjectOutputStream os = new ObjectOutputStream(fileOS);
+            DataOutputStream os= openOutputStreamTwo(nameFileDecrescente);
             for(int i=(data.length-1) ; i>=0 ; i--){
                 os.writeInt(data[i].getChave());
             }
             os.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    public static DataOutputStream openOutputStreamTwo(String name) throws Exception {
+        DataOutputStream out = null;
+        File file = new File(name);
+        out = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
+        return out;
+    }
+
 }

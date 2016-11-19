@@ -5,6 +5,7 @@ import Controller.SortController;
 
 import java.io.*;
 import java.util.Map;
+import java.util.Scanner;
 
 /**
  * Created by Geovane on 02/10/2016 and edited by Fabricio on 15/11/2016.
@@ -74,10 +75,17 @@ public class SortDAO {
         return null;
     }
 
-    private static DataOutputStream openOutputStream(String name) throws Exception {
+    public static DataOutputStream openOutputStream(String name) throws Exception {
         DataOutputStream out = null;
         File file = new File(name);
         out = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
+        return out;
+    }
+
+    private static DataInputStream openInputStream(String name) throws Exception {
+        DataInputStream out = null;
+        File file = new File(name);
+        out = new DataInputStream(new BufferedInputStream(new FileInputStream(file)));
         return out;
     }
 
@@ -87,6 +95,131 @@ public class SortDAO {
         out.writeDouble(data.getMalePopulation());
         out.writeDouble(data.getRatio());
         out.writeUTF(data.getCityName());
+    }
+
+    private static SexRatioEntity ReadData(DataInputStream out) throws Exception {
+        SexRatioEntity data = new SexRatioEntity();
+        data.setChave(out.readInt());
+        data.setFemalePopulation(out.readDouble());
+        data.setMalePopulation(out.readDouble());
+        data.setRatio(out.readDouble());
+        data.setCityName(out.readUTF());
+        return data;
+    }
+
+    public SexRatioEntity sharedItemOnBase( int codigo ){
+
+        /**
+         * If return NULL the chave don't exist because the file end. Else return a SexRatioEntity with all datas of the city that have this key
+         */
+
+        SexRatioEntity dataAux = new SexRatioEntity();
+        try {
+            DataInputStream in = openInputStream(FILE_BASE_PATH);
+            do {
+                dataAux = ReadData(in);
+            }while (dataAux.getChave() != codigo);
+            in.close();
+        }
+        catch (FileNotFoundException fnfe){
+            System.out.println("File not found, please verify the file path - " + fnfe.getMessage());
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return dataAux;
+    }
+
+    public SexRatioEntity[] readDictionary( String fileNameDictionary ,int size){
+        SexRatioEntity[] data = new SexRatioEntity[size];
+        try {
+            DataInputStream is = openInputStream(fileNameDictionary);
+            for (int i=0; i<size ; i++){
+                int code = is.readInt();
+                data[i] = sharedItemOnBase( code );
+            }
+            is.close();
+        }
+        catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    public void dispayData(SexRatioEntity[] data, int size){
+        for(int i=0 ; i<size ; i++){
+            System.out.print("Cidade número: ");
+            System.out.println((size+1));
+            System.out.print("Nome da Cidade: ");
+            System.out.println(data[i].getCityName());
+            System.out.print("População Masculina: ");
+            System.out.println(data[i].getMalePopulation());
+            System.out.print("População Feminina: ");
+            System.out.println(data[i].getFemalePopulation());
+            System.out.print("Razão entre as populações: ");
+            System.out.println(data[i].getRatio());
+            System.out.println("");
+        }
+    }
+
+    public void interfaceWithUser(){
+        System.out.print("Selecione a operação sobre a base dejesada:");
+        System.out.println("1 - Ordem Crescente pela População Masculina.");
+        System.out.println("2 - Ordem Crescente pela População Feminina.");
+        System.out.println("3 - Ordem Crescente pela Razão entre População Masculina e Feminina.");
+        System.out.println("4 - Ordem Crescente pelo Nome da Cidade.");
+        System.out.println("5 - Ordem Decrescente pela População Masculina.");
+        System.out.println("6 - Ordem Decrescente pela População Feminina.");
+        System.out.println("7 - Ordem Decrescente pela Razão entre População Masculina e Feminina.");
+        System.out.println("8 - Ordem Decrescente pelo Nome da Cidade.");
+        System.out.println("9 - Exit.");
+        Scanner dados = new Scanner(System.in);
+        int option = dados.nextInt();
+        if((option>0)&&(option<9)){
+            System.out.print("Informe o número de elementos a serem mostrados");
+            int numberOfElements = dados.nextInt();
+            if((numberOfElements<10000)&&(numberOfElements>0)){
+                SexRatioEntity[] data = new SexRatioEntity[numberOfElements];
+                switch (option){
+                    case 1:
+                        data = readDictionary("MaleCres.bin", numberOfElements);
+                        break;
+                    case 2:
+                        data = readDictionary("FemaleCres.bin", numberOfElements);
+                        break;
+                    case 3:
+                        data = readDictionary("RatioCres.bin", numberOfElements);
+                        break;
+                    case 4:
+                        data = readDictionary("CityCres.bin", numberOfElements);
+                        break;
+                    case 5:
+                        data = readDictionary("MaleDecres.bin", numberOfElements);
+                        break;
+                    case 6:
+                        data = readDictionary("FemaleDecres.bin", numberOfElements);
+                        break;
+                    case 7:
+                        data = readDictionary("RatioDecres.bin", numberOfElements);
+                        break;
+                    case 8:
+                        data = readDictionary("CityDecres.bin", numberOfElements);
+                        break;
+                }
+                dispayData(data, numberOfElements);
+            }
+            else {
+                System.out.println("Número de elementos selecionados inválido.");
+            }
+        } else if (option == 9) {
+            System.out.println("Você selecionou sair.");
+        }
+        else if(option<1 || option>9){
+            System.out.println("Opção selecionada inválida.");
+        }
     }
 
     public void persistenceResults(Map<String, String>[] algorithTimes) {

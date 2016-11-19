@@ -138,6 +138,7 @@ public class StringSortUtils extends AbstractSortUtils {
 
             }
         }
+        creatDictionaryString(data,"CityCres.bin","CityDecres.bin");
         long elapsedTime = System.currentTimeMillis() - startTime;
         return elapsedTime;
     }
@@ -283,8 +284,6 @@ public class StringSortUtils extends AbstractSortUtils {
 
 
         long elapsedTime = System.currentTimeMillis() - startTime;
-
-        creatDictionaryString(data,"CityCres.bin","CityDecres.bin");
 
         return elapsedTime;
     }
