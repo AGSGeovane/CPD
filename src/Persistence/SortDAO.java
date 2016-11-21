@@ -151,8 +151,6 @@ public class SortDAO {
 
     public void dispayData(SexRatioEntity[] data, int size){
         for(int i=0 ; i<size ; i++){
-            System.out.print("Cidade número: ");
-            System.out.println((size+1));
             System.out.print("Nome da Cidade: ");
             System.out.println(data[i].getCityName());
             System.out.print("População Masculina: ");
@@ -179,7 +177,7 @@ public class SortDAO {
         Scanner dados = new Scanner(System.in);
         int option = dados.nextInt();
         if((option>0)&&(option<9)){
-            System.out.print("Informe o número de elementos a serem mostrados");
+            System.out.print("Informe o número de elementos a serem mostrados:");
             int numberOfElements = dados.nextInt();
             if((numberOfElements<10000)&&(numberOfElements>0)){
                 SexRatioEntity[] data = new SexRatioEntity[numberOfElements];

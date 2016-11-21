@@ -1,4 +1,5 @@
 import Controller.SortController;
+import Persistence.SortDAO;
 
 /**
  * Created by Geovane on 17/08/2016.
@@ -13,6 +14,8 @@ public class Main {
     public static void main(String args[]) throws Exception {
         Main caller = new Main();
         caller.startSort();
+        SortDAO sis = new SortDAO();
+        sis.interfaceWithUser();
     }
 
 
