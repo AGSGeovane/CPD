@@ -129,19 +129,10 @@ public class NumericSortUtils extends AbstractSortUtils {
 
             }
         }
-        long elapsedTime = System.currentTimeMillis() - startTime;
 
         creatDictionary(data,"RatioCres.bin","RatioDecres.bin");
 
-        return elapsedTime;
-    }
-
-    public long bubbleSortFemale(SexRatioEntity data[]) {
-
-        long startTime = System.currentTimeMillis();
-
-        int n = data.length;
-        SexRatioEntity temp;
+        n = data.length;
 
         for (int i = 0; i < n; i++) {
             for (int j = 1; j < (n - i); j++) {
@@ -154,19 +145,10 @@ public class NumericSortUtils extends AbstractSortUtils {
 
             }
         }
-        long elapsedTime = System.currentTimeMillis() - startTime;
 
         creatDictionary(data,"FemaleCres.bin","FemaleDecres.bin");
 
-        return elapsedTime;
-    }
-
-    public long bubbleSortMale(SexRatioEntity data[]) {
-
-        long startTime = System.currentTimeMillis();
-
-        int n = data.length;
-        SexRatioEntity temp;
+        n = data.length;
 
         for (int i = 0; i < n; i++) {
             for (int j = 1; j < (n - i); j++) {
@@ -185,6 +167,7 @@ public class NumericSortUtils extends AbstractSortUtils {
 
         return elapsedTime;
     }
+
 
     /**
      * QuickSortRandomizado e funções auxiliares
