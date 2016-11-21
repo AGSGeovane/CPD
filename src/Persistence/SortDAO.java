@@ -179,7 +179,7 @@ public class SortDAO {
         if((option>0)&&(option<9)){
             System.out.print("Informe o número de elementos a serem mostrados:");
             int numberOfElements = dados.nextInt();
-            if((numberOfElements<10000)&&(numberOfElements>0)){
+            if((numberOfElements<=10000)&&(numberOfElements>0)){
                 SexRatioEntity[] data = new SexRatioEntity[numberOfElements];
                 switch (option){
                     case 1:
